@@ -1,4 +1,4 @@
-play-spring-data-jpa
-====================
+rebate backend
+==============
 
-A sample application demonstrating play-java using Spring Data JPA along with Spring Core.
+Rebate backend.
