@@ -2,9 +2,9 @@ package services.service.serviceimpl.abergin;
 
 import models.abergin.AUser;
 import models.abergin.UserToken;
-import play.exceptions.BaseException;
-import play.exceptions.ErrorConstants;
-import play.utilities.Crypto;
+import application.exceptions.BaseException;
+import application.exceptions.ErrorConstants;
+import application.encryption.Crypto;
 import repository.abergin.UserTokenRepository;
 import services.service.abergin.UserTokenServiceI;
 
@@ -13,7 +13,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.validation.constraints.NotNull;
 
-import static play.utilities.Util.*;
+import static application.encryption.Util.*;
 
 @Named
 @Singleton
@@ -27,7 +27,7 @@ public class UserTokenServiceImpl implements UserTokenServiceI{
 		try {
 			String token = Crypto.generateUniqueRandomString();
 			Long time = addTimeToDate(getSystemTimeInMillis(), 20);
-			AUser user = new AUser(userId);
+			//AUser user = new AUser(userId);
 			//UserToken userToken = new UserToken(token, time , user);
 			UserToken userToken = null;
 			UserToken theToken = userTokenRepository.save(userToken);

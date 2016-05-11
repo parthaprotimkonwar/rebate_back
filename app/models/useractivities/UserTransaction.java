@@ -1,5 +1,6 @@
 package models.useractivities;
 
+import com.sun.jna.platform.win32.Netapi32Util;
 import models.abergin.AUser;
 
 import javax.persistence.*;
@@ -12,6 +13,13 @@ import java.io.Serializable;
 @Table
 public class UserTransaction implements Serializable{
 
+    public UserTransaction(){}
+
+    public UserTransaction(AUser user){
+        this.user = user;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_TRANSACTION_ID")
@@ -19,8 +27,21 @@ public class UserTransaction implements Serializable{
 
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name="USER_ID")
-    public AUser user;
+    private AUser user;
 
-    @Column(name = "TRANSACTION_ID", length = 50)
-    private String transactionId;
+    public Long getUserTransactionId() {
+        return userTransactionId;
+    }
+
+    public void setUserTransactionId(Long userTransactionId) {
+        this.userTransactionId = userTransactionId;
+    }
+
+    public AUser getUser() {
+        return user;
+    }
+
+    public void setUser(AUser user) {
+        this.user = user;
+    }
 }

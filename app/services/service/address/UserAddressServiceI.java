@@ -2,11 +2,11 @@ package services.service.address;
 
 import java.util.List;
 
-import controllers.requestdto.AddressRequestDto;
-import controllers.responsedto.AddressDto;
+import rest.requestdto.AddressRequestDto;
+import rest.responsedto.AddressDto;
 import models.abergin.AUser;
 import models.address.UserAddress;
-import play.exceptions.BaseException;
+import application.exceptions.BaseException;
 
 public interface UserAddressServiceI {
 	

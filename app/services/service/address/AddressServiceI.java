@@ -1,8 +1,8 @@
 package services.service.address;
 
-import controllers.requestdto.AddressRequestDto;
+import rest.requestdto.AddressRequestDto;
 import models.address.Address;
-import play.exceptions.BaseException;
+import application.exceptions.BaseException;
 
 public interface AddressServiceI {
 

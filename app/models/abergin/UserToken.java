@@ -3,11 +3,8 @@ package models.abergin;
 import models.Constants;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.Date;
-
-import static utilities.Constants.SCHEMA_NAME_AUTHORIZATION;
 
 @Entity
 @Table(name="USER_TOKEN", schema= Constants.SCHEMA_NAME_REABTE_ABERGIN)

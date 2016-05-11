@@ -1,6 +1,6 @@
 package models.friends;
 
-import application.STATUS;
+import application.enums.STATUS;
 import models.Constants;
 
 import javax.persistence.*;

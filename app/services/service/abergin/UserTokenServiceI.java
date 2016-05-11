@@ -2,7 +2,7 @@ package services.service.abergin;
 
 import models.abergin.AUser;
 import models.abergin.UserToken;
-import play.exceptions.BaseException;
+import application.exceptions.BaseException;
 
 public interface UserTokenServiceI {
 

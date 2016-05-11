@@ -1,6 +1,6 @@
 package models.address;
 
-import static utilities.Constants.SCHEMA_NAME_AUTHORIZATION;
+import models.Constants;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name="USER_ADDRESS", schema=SCHEMA_NAME_AUTHORIZATION)
+@Table(name="USER_ADDRESS", schema= Constants.SCHEMA_NAME_REABTE_ADDRESS)
 public class UserAddress implements Serializable{
 
 	@EmbeddedId

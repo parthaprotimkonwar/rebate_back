@@ -1,6 +1,6 @@
 package models.payments;
 
-import application.PAYMENT_MODE;
+import application.enums.PAYMENT_MODE;
 import models.Constants;
 
 import javax.persistence.*;

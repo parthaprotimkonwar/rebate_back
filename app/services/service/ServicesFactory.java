@@ -1,13 +1,12 @@
 package services.service;
 
 import services.service.abergin.UserTokenServiceI;
-import services.service.abergin.UsersServiceI;
+import services.service.abergin.AUsersServiceI;
 import services.service.address.AddressServiceI;
 import services.service.address.UserAddressServiceI;
 import services.service.friends.UserFriendServiceI;
 import services.service.payments.PaymentOptionServiceI;
 import services.service.payments.UserPaymentOptionServiceI;
-import services.service.serviceimpl.payments.UserPaymentOptionServiceImpl;
 import services.service.useractivities.UserPointsServiceI;
 import services.service.useractivities.UserTransactionServiceI;
 
@@ -20,7 +19,7 @@ import javax.inject.Singleton;
 public class ServicesFactory {
 
 	@Inject
-	public UsersServiceI usersService;
+	public AUsersServiceI usersService;
 
 	@Inject
 	public UserTokenServiceI userTokenService;

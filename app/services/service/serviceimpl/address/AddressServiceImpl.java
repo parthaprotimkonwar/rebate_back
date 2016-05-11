@@ -4,10 +4,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import controllers.requestdto.AddressRequestDto;
+import rest.requestdto.AddressRequestDto;
 import models.address.Address;
-import play.exceptions.BaseException;
-import play.exceptions.ErrorConstants;
+import application.exceptions.BaseException;
+import application.exceptions.ErrorConstants;
 import repository.address.AddressRepository;
 import services.service.address.AddressServiceI;
 

@@ -1,6 +1,6 @@
 package models.thirdparty;
 
-import static utilities.Constants.SCHEMA_NAME_AUTHORIZATION;
+import models.Constants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name="USER_COMMUNICATION", schema=SCHEMA_NAME_AUTHORIZATION)
+@Table(name="USER_COMMUNICATION", schema= Constants.SCHEMA_NAME_REABTE_TRANSACTION)
 public class UserCommunication implements Serializable{
 
 	@Id
