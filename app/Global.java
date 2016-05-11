@@ -69,6 +69,7 @@ public class Global extends GlobalSettings {
         return ctx.getBean(aClass);
     }
 
+
     /**
      * This configuration establishes Spring Data concerns including those of JPA.
      */
