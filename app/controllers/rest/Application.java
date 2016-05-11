@@ -10,12 +10,12 @@ import javax.inject.Singleton;
 import controllers.base.BaseController;
 import controllers.requestdto.UsersRequestDto;
 import controllers.responsedto.UsersResponseDto;
+import models.abergin.AUser;
 import models.Person;
-import models.Users;
 import play.exceptions.BaseException;
 import play.mvc.BodyParser;
 import play.mvc.Result;
-import services.serviceimpl.ServicesFactory;
+import services.service.ServicesFactory;
 
 /**
  * The main set of web services.
@@ -61,10 +61,10 @@ public class Application extends BaseController {
         UsersRequestDto request = new UsersRequestDto();
         request.userType = "USER";
         try {
-        	Users user = servicesFactory.usersService.createUser("GUEST");
-            Users onotherUser = servicesFactory.usersService.findUserById(user.userId);
-            return ok(views.html.index.render("Found id: " + retrievedPerson.id + " new Id: "+ onotherUser.userId + " of person/people Addeed text"));
-        } catch(BaseException ex) {
+        	/*AUser user = servicesFactory.usersService.createUser("GUEST");
+            AUser onotherUser = servicesFactory.usersService.findUserById(user.userId);*/
+            return ok(views.html.index.render("Found id: " + retrievedPerson.id + " new Id: /*+ onotherUser.userId + */ of person/people Addeed text"));
+        } catch(Exception ex) {
         	
         }
         return ok(views.html.index.render("of person/people Addeed text"));
@@ -76,15 +76,15 @@ public class Application extends BaseController {
     	
     	List<UsersResponseDto> response = null;
     	try {
-	    	List<Users> users = servicesFactory.usersService.users();
+	    	List<Person> users = servicesFactory.personService.persons();
 	    	
 	    	response = new ArrayList<>();
-	    	for(Users user : users) {
-	    		UsersResponseDto aUserResponse = new UsersResponseDto(user.userId, String.valueOf(user.userId), user.userType);
+	    	for(Person user : users) {
+	    		UsersResponseDto aUserResponse = new UsersResponseDto(user.id, user.firstname, null);
 	    		response.add(aUserResponse);
 	    	}
 	    	
-    	} catch (BaseException ex) {
+    	} catch (Exception ex) {
     		
     	}
     	return convertObjectToJsonResponse(response);

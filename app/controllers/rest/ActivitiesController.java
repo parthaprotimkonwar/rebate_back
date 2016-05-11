@@ -1,32 +1,22 @@
 package controllers.rest;
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-import java.util.List;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
-import org.springframework.transaction.annotation.Transactional;
-
-import com.frugalbin.common.dto.request.integration.UserDetailsBean;
-import com.frugalbin.common.exceptions.BusinessException;
-
 import controllers.base.BaseController;
 import controllers.requestdto.AddressRequestDto;
 import controllers.responsedto.AddressDto;
 import controllers.responsedto.AddressResponseDto;
 import controllers.responsedto.ErrorResponse;
 import controllers.responsedto.ListsAddressResponseDto;
-import models.UserAddress;
-import models.Users;
-import models.UsersGuest;
+import models.address.UserAddress;
+import models.abergin.AUser;
 import play.exceptions.BaseException;
-import play.exceptions.ErrorConstants;
 import play.mvc.BodyParser;
 import play.mvc.Result;
-import services.serviceimpl.ServicesFactory;
+import services.service.ServicesFactory;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+import java.util.List;
 
 @Named
 @Singleton
@@ -45,7 +35,7 @@ public class ActivitiesController extends BaseController{
 		AddressResponseDto response = null;
 		try {
 			AddressRequestDto addressRequest = convertRequestBodyToObject(request().body(), AddressRequestDto.class);
-			Users user = servicesFactory.userTokenService.findUserAttachedToToken(addressRequest.token);
+			AUser user = servicesFactory.userTokenService.findUserAttachedToToken(addressRequest.token);
 			UserAddress userAddress = servicesFactory.userAddressService.createUserAddress(user, addressRequest);
 			response = new AddressResponseDto(addressRequest.token, userAddress.userIdAddressId.address.addressId, utilities.AppConstants.Status.SUCCESS.name());
 			
@@ -65,7 +55,7 @@ public class ActivitiesController extends BaseController{
 		ListsAddressResponseDto response = null;
 		try {
 			AddressRequestDto addressRequest = convertRequestBodyToObject(request().body(), AddressRequestDto.class);
-			Users user = servicesFactory.userTokenService.findUserAttachedToToken(addressRequest.token);
+			AUser user = servicesFactory.userTokenService.findUserAttachedToToken(addressRequest.token);
 			List<AddressDto> addresses = servicesFactory.userAddressService.findUserAddress(user);
 			response = new ListsAddressResponseDto(addressRequest.token, addresses, utilities.AppConstants.Status.SUCCESS.name());
 			
@@ -79,7 +69,7 @@ public class ActivitiesController extends BaseController{
 		return convertObjectToJsonResponse(response);
 	}
 	
-	@BodyParser.Of(BodyParser.Json.class)
+	/*@BodyParser.Of(BodyParser.Json.class)
 	public Result getUser()
 	{
 		UserDetailsBean userDetails = new UserDetailsBean();
@@ -87,11 +77,11 @@ public class ActivitiesController extends BaseController{
 		{
 			Map<String, Integer> map = convertRequestBodyToObject(request().body(), Map.class);
 			Long userId = map.get("userId").longValue();
-			UsersGuest user = servicesFactory.usersGuestService.findUserById(userId);
+			UserGuest user = servicesFactory.usersGuestService.findUserById(userId);
 			
 			if(user == null)
 			{
-				throw new BusinessException(1001, "User is invalid");
+				throw new BusinessException(1001, "AUser is invalid");
 			}
 			
 			userDetails.setUserId(userId);
@@ -109,5 +99,5 @@ public class ActivitiesController extends BaseController{
 			return errorObjectToJsonResponse(errorResponse);
 		}
 		return convertObjectToJsonResponse(userDetails);
-	}
+	}*/
 }

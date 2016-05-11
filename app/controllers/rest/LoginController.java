@@ -1,32 +1,13 @@
 package controllers.rest;
 
-import static play.exceptions.ErrorConstants.DUPLICATE_EMAIL_ID;
-import static play.exceptions.ErrorConstants.INVALID_LOGIN;
-import static play.exceptions.ErrorConstants.NO_SUCH_USER_TYPE;
+import controllers.base.BaseController;
+import play.Logger;
+import play.Logger.ALogger;
+import services.service.ServicesFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-
-import controllers.base.BaseController;
-import controllers.requestdto.UsersRequestDto;
-import controllers.responsedto.ErrorResponse;
-import controllers.responsedto.UsersResponseDto;
-import models.UserToken;
-import models.Users;
-import models.UsersFrugal;
-import models.UsersGuest;
-import models.UsersSocial;
-import play.Logger;
-import play.Logger.ALogger;
-import play.exceptions.BaseException;
-import play.exceptions.ValidationException;
-import play.mvc.BodyParser;
-import play.mvc.Result;
-import services.serviceimpl.ServicesFactory;
-import utilities.AppConstants.UserType;
-import validations.responsehandlers.ValidationResponse;
-import validations.validationengines.UsersRequestDtoValidationEngine;
 
 @Named
 @Singleton
@@ -38,10 +19,10 @@ public class LoginController extends BaseController{
 	ServicesFactory serviceFactory;
 	
 	/**
-	 * User can log in
+	 * AUser can log in
 	 * @return
 	 */
-	@BodyParser.Of(BodyParser.Json.class)
+	/*@BodyParser.Of(BodyParser.Json.class)
 	public Result login() {
 		logger.info("Inside login()");
 		UsersResponseDto response = null;
@@ -58,7 +39,7 @@ public class LoginController extends BaseController{
 			switch (userType) {
 				
 				case FRUGAL:
-					UsersFrugal userFrugal = serviceFactory.usersFrugalService.login(userRequestDto);
+					UserFrugal userFrugal = serviceFactory.usersFrugalService.login(userRequestDto);
 					if(userFrugal != null) {
 						 userToken = serviceFactory.userTokenService.createOrupdateToken(userFrugal.userId);
 						 response = new UsersResponseDto(userFrugal.userId, userToken.tokenId, utilities.AppConstants.Status.SUCCESS.name());
@@ -68,11 +49,11 @@ public class LoginController extends BaseController{
 					break;
 				
 				case SOCIAL:
-					UsersSocial userSocial = null;
+					UserSocial userSocial = null;
 					userSocial = serviceFactory.usersSocialService.login(userRequestDto);
 
-					if(userSocial == null) {	//User not registered
-						Users user = serviceFactory.usersService.createUser(userRequestDto.userType);
+					if(userSocial == null) {	//AUser not registered
+						AUser user = serviceFactory.usersService.createUser(userRequestDto.userType);
 						userSocial = serviceFactory.usersSocialService.createUser(userRequestDto, user);
 					}
 					
@@ -83,11 +64,11 @@ public class LoginController extends BaseController{
 					break;
 					
 				case GUEST:
-					UsersGuest userGuest = null;
+					UserGuest userGuest = null;
 					userGuest = serviceFactory.usersGuestService.login(userRequestDto);
 					
 					if(userGuest == null) {
-						Users user = serviceFactory.usersService.createUser(userRequestDto.userType);
+						AUser user = serviceFactory.usersService.createUser(userRequestDto.userType);
 						userGuest = serviceFactory.usersGuestService.createUser(userRequestDto, user);
 					}
 					if(userGuest != null) {
@@ -114,13 +95,13 @@ public class LoginController extends BaseController{
 		}
 		logger.info("Exiting login()");
 		return convertObjectToJsonResponse(response);
-	}
+	}*/
 	
 	/**
 	 * Sign up a user
 	 * @return
 	 */
-	@BodyParser.Of(BodyParser.Json.class)
+	/*@BodyParser.Of(BodyParser.Json.class)
 	public Result signup() {
 		
 		UsersResponseDto response;
@@ -135,7 +116,7 @@ public class LoginController extends BaseController{
 			
 			UserType userType = UserType.value(userRequestDto.userType);
 			
-			Users user = serviceFactory.usersService.createUser(userRequestDto.userType);
+			AUser user = serviceFactory.usersService.createUser(userRequestDto.userType);
 			
 			response = null;
 			UserToken userToken = null;
@@ -143,7 +124,7 @@ public class LoginController extends BaseController{
 			switch (userType) {
 
 				case FRUGAL:
-					UsersFrugal userFrugal = serviceFactory.usersFrugalService.findUserByEmailId(userRequestDto.email);
+					UserFrugal userFrugal = serviceFactory.usersFrugalService.findUserByEmailId(userRequestDto.email);
 					if(userFrugal == null) {		//email id not present in system
 						userFrugal = serviceFactory.usersFrugalService.createUser(userRequestDto, user);
 						userToken = serviceFactory.userTokenService.createOrupdateToken(userFrugal.userId);
@@ -165,5 +146,5 @@ public class LoginController extends BaseController{
 			return errorObjectToJsonResponse(errorResponse);
 		}
 		return convertObjectToJsonResponse(response);
-	}
+	}*/
 }
