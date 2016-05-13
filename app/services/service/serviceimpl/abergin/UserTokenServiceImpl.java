@@ -1,10 +1,10 @@
 package services.service.serviceimpl.abergin;
 
-import models.abergin.AUser;
-import models.abergin.UserToken;
+import application.encryption.Crypto;
 import application.exceptions.BaseException;
 import application.exceptions.ErrorConstants;
-import application.encryption.Crypto;
+import models.abergin.AUser;
+import models.abergin.UserToken;
 import repository.abergin.UserTokenRepository;
 import services.service.abergin.UserTokenServiceI;
 
@@ -13,7 +13,8 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.validation.constraints.NotNull;
 
-import static application.encryption.Util.*;
+import static application.encryption.Util.addTimeToDate;
+import static application.encryption.Util.getSystemTimeInMillis;
 
 @Named
 @Singleton
@@ -27,9 +28,8 @@ public class UserTokenServiceImpl implements UserTokenServiceI{
 		try {
 			String token = Crypto.generateUniqueRandomString();
 			Long time = addTimeToDate(getSystemTimeInMillis(), 20);
-			//AUser user = new AUser(userId);
-			//UserToken userToken = new UserToken(token, time , user);
-			UserToken userToken = null;
+			AUser user = new AUser(userId);
+			UserToken userToken = new UserToken(token, time , user);
 			UserToken theToken = userTokenRepository.save(userToken);
 			return theToken;
 			
@@ -65,7 +65,7 @@ public class UserTokenServiceImpl implements UserTokenServiceI{
 		try {
 			UserToken previousToken = tokenExistForUser(userId);
 			if(previousToken != null) {
-				removeToken(previousToken.tokenId);
+				removeToken(previousToken.getTokenId());
 			}
 			UserToken userToken = createToken(userId);
 			return userToken;
@@ -99,7 +99,7 @@ public class UserTokenServiceImpl implements UserTokenServiceI{
 				ErrorConstants error = ErrorConstants.INVALID_TOKEN;
 				throw new BaseException(error.errorCode, error.errorMessage);
 			}*/
-			return userToken.user;
+			return userToken.getUser();
 			
 		} catch (Exception ex) {
 			ErrorConstants error = ErrorConstants.DATA_FETCH_EXCEPTION;

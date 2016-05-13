@@ -1,4 +1,4 @@
-package rest.requestdto;
+package rest.bean.request;
 
 import java.io.Serializable;
 

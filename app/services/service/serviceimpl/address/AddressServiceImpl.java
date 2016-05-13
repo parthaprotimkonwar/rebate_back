@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import rest.requestdto.AddressRequestDto;
+import rest.bean.request.AddressRequestDto;
 import models.address.Address;
 import application.exceptions.BaseException;
 import application.exceptions.ErrorConstants;

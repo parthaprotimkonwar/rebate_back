@@ -3,9 +3,9 @@ package rest.controllers;
 import models.Person;
 import play.mvc.BodyParser;
 import play.mvc.Result;
+import rest.bean.request.UserTransactionRequestBean;
+import rest.bean.response.LoginResponseBean;
 import rest.factory.BaseController;
-import rest.requestdto.UsersRequestDto;
-import rest.responsedto.UsersResponseDto;
 import services.service.ServicesFactory;
 
 import javax.annotation.Resource;
@@ -55,8 +55,8 @@ public class Application extends BaseController {
         final Person retrievedPerson = servicesFactory.personService.findOnePerson(savedPerson.id);
 
         // Deliver the index page with a message showing the id that was generated.
-        UsersRequestDto request = new UsersRequestDto();
-        request.userType = "USER";
+        /*UserTransactionRequestBean request = new UserTransactionRequestBean(tokenId);
+        request.userType = "USER";*/
         try {
         	/*AUser user = servicesFactory.usersService.createAUser("GUEST");
             AUser onotherUser = servicesFactory.usersService.findUserById(user.userId);*/
@@ -71,13 +71,13 @@ public class Application extends BaseController {
     
     public Result persons() {
     	
-    	List<UsersResponseDto> response = null;
+    	List<LoginResponseBean> response = null;
     	try {
 	    	List<Person> users = servicesFactory.personService.persons();
 	    	
 	    	response = new ArrayList<>();
 	    	for(Person user : users) {
-	    		UsersResponseDto aUserResponse = new UsersResponseDto(user.id, user.firstname, null);
+	    		LoginResponseBean aUserResponse = new LoginResponseBean(user.id, user.firstname, null);
 	    		response.add(aUserResponse);
 	    	}
 	    	

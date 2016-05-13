@@ -2,8 +2,8 @@ package services.service.address;
 
 import java.util.List;
 
-import rest.requestdto.AddressRequestDto;
-import rest.responsedto.AddressDto;
+import rest.bean.request.AddressRequestDto;
+import rest.bean.response.AddressDto;
 import models.abergin.AUser;
 import models.address.UserAddress;
 import application.exceptions.BaseException;

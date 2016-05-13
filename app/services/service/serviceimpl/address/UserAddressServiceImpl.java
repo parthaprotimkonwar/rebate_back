@@ -10,8 +10,8 @@ import javax.inject.Singleton;
 import models.abergin.AUser;
 import org.springframework.transaction.annotation.Transactional;
 
-import rest.requestdto.AddressRequestDto;
-import rest.responsedto.AddressDto;
+import rest.bean.request.AddressRequestDto;
+import rest.bean.response.AddressDto;
 import models.address.Address;
 import models.address.UserAddress;
 import models.address.UserIdAddressId;
@@ -58,7 +58,7 @@ public class UserAddressServiceImpl implements UserAddressServiceI{
 			List<AddressDto> addressDto = new ArrayList<>();
 			for(UserAddress userAddress : userAddresses) {
 				Address a = userAddress.userIdAddressId.address;
-				AddressDto address = new AddressDto(a.addressId, a.addressHeading, a.pincode, a.address, a.landmark, a.phoneNo, a.city, a.state, a.country);
+				AddressDto address = new AddressDto(a.getAddressId(), a.getAddressHeading(), a.getPincode(), a.getAddress(), a.getLandmark(), a.getPhoneNo(), a.getCity(), a.getState(), a.getCountry());
 				addressDto.add(address);
 			}
 			return addressDto;

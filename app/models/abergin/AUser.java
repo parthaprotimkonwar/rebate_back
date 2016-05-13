@@ -15,7 +15,12 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="USERS", schema= Constants.SCHEMA_NAME_REABTE_ABERGIN)
+@Table(name="USERS", schema= Constants.SCHEMA_NAME_REABTE_ABERGIN,
+		uniqueConstraints={@UniqueConstraint(columnNames = {"USER_TYPE" , "EMAIL"})},
+		indexes = {
+				@Index(name = "USERS_REABTE_LOGIN", columnList = "USER_TYPE,EMAIL,PASSWORD"),
+				@Index(name = "USERS_SOCIAL_LOGIN", columnList = "USER_TYPE,EMAIL")
+		})
 public class AUser implements Serializable{
 
 	public AUser() {}
@@ -32,10 +37,13 @@ public class AUser implements Serializable{
 	@Column(name = "NAME", length = 20)
 	private String name;
 
-	@Column(name = "EMAIL", length = 30, unique = true)
+	@Column(name = "EMAIL", length = 30)
 	private String email;
 
-	@Column(name = "PASSWORD")
+	@Column(name = "MOBILE", length = 15, unique = true)
+	private String mobile;
+
+	@Column(name = "PASSWORD", length = 50)
 	private String password;
 
 	@Column(name = "IMAGE_URL", columnDefinition = "text")
@@ -71,10 +79,15 @@ public class AUser implements Serializable{
 	@OneToMany(mappedBy="userIdFriendId.user")
 	private Set<UserFriend> userFriendSet;
 
-	public AUser(USER_TYPE userType, String name, String email, String password, String imageUrl, Date lastLogin, Date createdOn, STATUS status) {
+	public AUser(Long userId) {
+		this.userId = userId;
+	}
+
+	public AUser(USER_TYPE userType, String name, String email, String mobile, String password, String imageUrl, Date lastLogin, Date createdOn, STATUS status) {
 		this.userType = userType;
 		this.name = name;
 		this.email = email;
+		this.mobile = mobile;
 		this.password = password;
 		this.imageUrl = imageUrl;
 		this.lastLogin = lastLogin;
@@ -176,5 +189,13 @@ public class AUser implements Serializable{
 
 	public Set<UserFriend> getUserFriendSet() {
 		return userFriendSet;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 }

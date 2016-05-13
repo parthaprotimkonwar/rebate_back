@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import rest.responsedto.ErrorResponse;
+import rest.bean.response.ErrorResponse;
 import application.exceptions.ErrorConstants;
 
 public class Util {

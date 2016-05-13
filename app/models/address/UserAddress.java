@@ -19,4 +19,32 @@ public class UserAddress implements Serializable{
 	public UserAddress(UserIdAddressId userIdAddressId) {
 		this.userIdAddressId = userIdAddressId;
 	}
+
+
+	@Override
+	public boolean equals(Object thatObject) {
+
+		if(thatObject == null || thatObject.getClass() != getClass())
+			return false;
+
+		UserAddress thatUserAddress = (UserAddress)thatObject;
+		return userIdAddressId.user.getUserId().equals(thatUserAddress.userIdAddressId.user.getUserId())
+				&& userIdAddressId.address.getAddressId().equals(thatUserAddress.userIdAddressId.address.getAddressId());
+	}
+
+	@Override
+	public int hashCode() {
+		int userIdHashCode = 17;
+		try {
+			userIdHashCode = userIdAddressId.user.getUserId().hashCode();
+		} catch (Exception ex){
+		}
+		int addressIdHashCode = 17;
+		try {
+			addressIdHashCode = userIdAddressId.address.getAddressId().hashCode();
+		} catch (Exception ex) {
+
+		}
+		return userIdHashCode + addressIdHashCode;
+	}
 }

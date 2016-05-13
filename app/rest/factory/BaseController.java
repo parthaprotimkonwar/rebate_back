@@ -4,7 +4,7 @@ import org.apache.http.HttpStatus;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import rest.responsedto.ErrorResponse;
+import rest.bean.response.ErrorResponse;
 import application.exceptions.BaseException;
 import application.exceptions.ErrorConstants;
 import play.libs.Json;

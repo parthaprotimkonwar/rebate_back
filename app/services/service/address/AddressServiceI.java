@@ -1,6 +1,6 @@
 package services.service.address;
 
-import rest.requestdto.AddressRequestDto;
+import rest.bean.request.AddressRequestDto;
 import models.address.Address;
 import application.exceptions.BaseException;
 

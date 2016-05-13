@@ -1,4 +1,4 @@
-package rest.responsedto;
+package rest.bean.response;
 
 import java.util.List;
 

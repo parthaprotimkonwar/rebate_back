@@ -1,5 +1,6 @@
 package services.service.abergin;
 
+import application.enums.USER_TYPE;
 import application.exceptions.BaseException;
 import com.fasterxml.jackson.databind.deser.Deserializers;
 import models.abergin.AUser;
@@ -18,6 +19,14 @@ public interface AUsersServiceI {
 	AUser createAUser(AUserBean userBean) throws BaseException;
 
 	/**
+	 * Login
+	 * @param userBean
+	 * @return
+	 * @throws BaseException
+	 */
+	AUser login(AUserBean userBean) throws BaseException;
+
+	/**
 	 * Find a user by emailId and Password
 	 * @param email
 	 * @param password
@@ -32,7 +41,8 @@ public interface AUsersServiceI {
 	 * @return
 	 * @throws BaseException
 	 */
-	AUser findUserByEmail(String email) throws BaseException;
+	AUser findUserByEmail(String email, USER_TYPE userType) throws BaseException;
+
 
 	/**
 	 * Find a new User
@@ -55,4 +65,13 @@ public interface AUsersServiceI {
 	 * @throws BaseException
 	 */
 	void deleteUser(Long userId) throws BaseException;
+
+
+	/**
+	 * Convert to UserBean
+	 * @param aUser
+	 * @return
+	 * @throws BaseException
+	 */
+	AUserBean convertToUserBean(AUser aUser) throws BaseException;
 }

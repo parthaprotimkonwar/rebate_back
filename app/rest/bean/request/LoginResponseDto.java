@@ -1,8 +1,8 @@
-package rest.requestdto;
+package rest.bean.request;
 
 import java.io.Serializable;
 
-import rest.responsedto.ErrorResponse;
+import rest.bean.response.ErrorResponse;
 
 public class LoginResponseDto implements Serializable{
 

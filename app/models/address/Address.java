@@ -27,32 +27,112 @@ public class Address implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ADDRESS_ID")
-	public Long addressId;
+	private Long addressId;
 	
 	@Column(name="ADDRESS_HEADING", length=30, nullable=false)
-	public String addressHeading;
+	private String addressHeading;
 	
 	@Column(name="PINCODE", length=10, nullable=false)
-	public String pincode;
+	private String pincode;
 	
 	@Column(name = "ADDRESS", columnDefinition = "text")
-	public String address;
+	private String address;
 	
 	@Column(name="LANDMARK", length=100)
-	public String landmark;
+	private String landmark;
 	
 	@Column(name="PHONE_NO", length=15)
-	public String phoneNo;
+	private String phoneNo;
 	
 	@Column(name="CITY", length=20)
-	public String city;
+	private String city;
 	
 	@Column(name="STATE", length=20)
-	public String state;
+	private String state;
 	
 	@Column(name="COUNTRY", length=20)
-	public String country;
+	private String country;
 	
 	@OneToMany(mappedBy="userIdAddressId.address", cascade=CascadeType.ALL)
-	public Set<UserAddress> userAddress;
+	private Set<UserAddress> userAddress;
+
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+
+	public String getAddressHeading() {
+		return addressHeading;
+	}
+
+	public void setAddressHeading(String addressHeading) {
+		this.addressHeading = addressHeading;
+	}
+
+	public String getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLandmark() {
+		return landmark;
+	}
+
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Set<UserAddress> getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(Set<UserAddress> userAddress) {
+		this.userAddress = userAddress;
+	}
 }

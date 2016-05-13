@@ -1,4 +1,4 @@
-package rest.responsedto;
+package rest.bean.response;
 
 import java.io.Serializable;
 import java.util.ArrayList;

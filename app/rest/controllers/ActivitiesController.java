@@ -7,11 +7,11 @@ import models.address.UserAddress;
 import play.mvc.BodyParser;
 import play.mvc.Result;
 import rest.factory.BaseController;
-import rest.requestdto.AddressRequestDto;
-import rest.responsedto.AddressDto;
-import rest.responsedto.AddressResponseDto;
-import rest.responsedto.ErrorResponse;
-import rest.responsedto.ListsAddressResponseDto;
+import rest.bean.request.AddressRequestDto;
+import rest.bean.response.AddressDto;
+import rest.bean.response.AddressResponseDto;
+import rest.bean.response.ErrorResponse;
+import rest.bean.response.ListsAddressResponseDto;
 import services.service.ServicesFactory;
 
 import javax.inject.Inject;
@@ -38,7 +38,7 @@ public class ActivitiesController extends BaseController{
 			AddressRequestDto addressRequest = convertRequestBodyToObject(request().body(), AddressRequestDto.class);
 			AUser user = servicesFactory.userTokenService.findUserAttachedToToken(addressRequest.token);
 			UserAddress userAddress = servicesFactory.userAddressService.createUserAddress(user, addressRequest);
-			response = new AddressResponseDto(addressRequest.token, userAddress.userIdAddressId.address.addressId, STATUS.SUCCESS.name());
+			response = new AddressResponseDto(addressRequest.token, userAddress.userIdAddressId.address.getAddressId(), STATUS.SUCCESS.name());
 			
 		} catch (BaseException ex) {
 			ErrorResponse errorResponse = new ErrorResponse(ex.getErrorCode(), ex.getErrorMessage());
