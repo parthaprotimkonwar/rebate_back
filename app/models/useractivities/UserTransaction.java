@@ -1,6 +1,5 @@
 package models.useractivities;
 
-import com.sun.jna.platform.win32.Netapi32Util;
 import models.abergin.AUser;
 
 import javax.persistence.*;

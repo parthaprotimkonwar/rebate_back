@@ -47,6 +47,7 @@ public class BaseController extends Controller{
 	 */
 	public Result convertObjectToJsonResponse(Object object){
 		JsonNode jsonNode = Json.toJson(object);
+		response().setHeader("Access-Control-Allow-Origin", request().getHeader("Origin"));
 		return ok(jsonNode);
 	}
 	
@@ -101,6 +102,7 @@ public class BaseController extends Controller{
 	 */
 	public Result errorObjectToJsonResponse(int httpErrorCode, ErrorResponse errorResponse){
 		JsonNode jsonNode = Json.toJson(errorResponse);
+		response().setHeader("Access-Control-Allow-Origin", request().getHeader("Origin"));
 		return status(httpErrorCode, jsonNode);
 	}
 }

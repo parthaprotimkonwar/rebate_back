@@ -1,14 +1,19 @@
 package rest.controllers;
 
+import application.enums.STATUS;
 import application.exceptions.BaseException;
 import application.exceptions.ErrorConstants;
 import models.abergin.AUser;
 import models.abergin.UserToken;
 import models.bean.abergin.AUserBean;
+import models.useractivities.UserTransaction;
 import play.mvc.BodyParser;
 import play.mvc.Result;
+import rest.bean.request.UserTransactionRequestBean;
 import rest.bean.response.ErrorResponse;
 import rest.bean.response.LoginResponseBean;
+import rest.bean.response.ResponseBean;
+import rest.bean.response.UserTransactionResponseBean;
 import rest.factory.BaseController;
 import services.service.ServicesFactory;
 
@@ -62,6 +67,26 @@ public class UserLoginController extends BaseController{
             UserToken token = servicesFactory.userTokenService.createOrupdateToken(user.getUserId());
             response = new LoginResponseBean(user.getUserId(), token.getTokenId(), user.getStatus());
 
+        } catch (BaseException ex) {
+            ErrorResponse errorResponse = new ErrorResponse(ex.getErrorCode(), ex.getErrorMessage());
+            return errorObjectToJsonResponse(errorResponse);
+        } catch (Exception e) {
+            ErrorResponse errorResponse = unknownErrorResponse();
+            return errorObjectToJsonResponse(errorResponse);
+        }
+        return convertObjectToJsonResponse(response);
+
+    }
+
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result logout() {
+
+        ResponseBean response = null;
+        try {
+            UserTransactionRequestBean userBean = convertRequestBodyToObject(request().body(), UserTransactionRequestBean.class);
+            servicesFactory.userTokenService.removeToken(userBean.getToken());
+            response = new ResponseBean(STATUS.SUCCESS);
         } catch (BaseException ex) {
             ErrorResponse errorResponse = new ErrorResponse(ex.getErrorCode(), ex.getErrorMessage());
             return errorObjectToJsonResponse(errorResponse);

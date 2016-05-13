@@ -4,19 +4,29 @@
 
 # Home page - we use the @controllers syntax here so that the router knows we are referring to a class. In turn it
 # will call on the GlobalSettings.getController method to resolve the actual controller instance.
-GET     /                           @rest.controllers.Application.index
+GET         /                           @rest.controllers.Application.index
 
-GET		/persons					@rest.controllers.Application.persons
+GET		    /persons					@rest.controllers.Application.persons
 
-POST	/login						@rest.controllers.UserLoginController.login
+POST	    /login						@rest.controllers.UserLoginController.login
 
-POST	/signup						@rest.controllers.UserLoginController.signup
+POST	    /signup						@rest.controllers.UserLoginController.signup
 
-POST    /usertransaction            @rest.controllers.UserTransactionController.userTransaction
+POST        /logout                     @rest.controllers.UserLoginController.logout
 
-POST	/address					@rest.controllers.ActivitiesController.createNewAddress
+POST        /usertransaction            @rest.controllers.UserTransactionController.userTransaction
 
-POST	/address/user				@rest.controllers.ActivitiesController.listsAddress
+POST	    /address					@rest.controllers.ActivitiesController.createNewAddress
+
+POST	    /address/user				@rest.controllers.ActivitiesController.listsAddress
+
+OPTIONS     /signup                     @rest.controllers.CORSAllowController.enablecors
+
+OPTIONS     /login                      @rest.controllers.CORSAllowController.enablecors
+
+OPTIONS     /logout                     @rest.controllers.CORSAllowController.enablecors
+
+OPTIONS     /usertransaction            @rest.controllers.CORSAllowController.enablecors
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
