@@ -2,6 +2,8 @@ package rest.controllers;
 
 import application.exceptions.BaseException;
 import models.abergin.AUser;
+import models.bean.useractivities.UserPointsBean;
+import models.useractivities.UserPoints;
 import models.useractivities.UserTransaction;
 import play.mvc.BodyParser;
 import play.mvc.Result;
@@ -45,5 +47,31 @@ public class UserTransactionController extends BaseController{
         }
         return convertObjectToJsonResponse(response);
     }
+
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result userPoints() {
+
+        UserPointsBean response = null;
+        try {
+            UserTransactionRequestBean userBean = convertRequestBodyToObject(request().body(), UserTransactionRequestBean.class);
+            AUser user = servicesFactory.userTokenService.findUserAttachedToToken(userBean.getToken());
+            UserPoints userPoints = servicesFactory.userPointsService.findPointsAttachedToAUser(user);
+            if(userPoints == null) {
+                response = new UserPointsBean(user.getUserId(), 0);
+            } else {
+                response = servicesFactory.userPointsService.convertIntoUserPointsBean(userPoints);
+            }
+        } catch (BaseException ex) {
+            ErrorResponse errorResponse = new ErrorResponse(ex.getErrorCode(), ex.getErrorMessage());
+            return errorObjectToJsonResponse(errorResponse);
+        } catch (Exception e) {
+            ErrorResponse errorResponse = unknownErrorResponse();
+            return errorObjectToJsonResponse(errorResponse);
+        }
+        return convertObjectToJsonResponse(response);
+    }
+
+
 
 }

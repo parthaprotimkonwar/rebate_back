@@ -6,14 +6,12 @@ import application.exceptions.ErrorConstants;
 import models.abergin.AUser;
 import models.abergin.UserToken;
 import models.bean.abergin.AUserBean;
-import models.useractivities.UserTransaction;
 import play.mvc.BodyParser;
 import play.mvc.Result;
 import rest.bean.request.UserTransactionRequestBean;
 import rest.bean.response.ErrorResponse;
 import rest.bean.response.LoginResponseBean;
 import rest.bean.response.ResponseBean;
-import rest.bean.response.UserTransactionResponseBean;
 import rest.factory.BaseController;
 import services.service.ServicesFactory;
 
@@ -39,7 +37,8 @@ public class UserLoginController extends BaseController{
             AUserBean userBean = convertRequestBodyToObject(request().body(), AUserBean.class);
             AUser user = servicesFactory.usersService.createAUser(userBean);
             UserToken token = servicesFactory.userTokenService.createOrupdateToken(user.getUserId());
-            response = new LoginResponseBean(user.getUserId(), token.getTokenId(), user.getStatus());
+            AUserBean userDetails = servicesFactory.usersService.convertToUserBean(user);
+            response = new LoginResponseBean(user.getUserId(), token.getTokenId(), user.getStatus(), userDetails);
 
         } catch (BaseException ex) {
             System.out.println(ex.getCause());
@@ -65,7 +64,8 @@ public class UserLoginController extends BaseController{
                 throw new BaseException(error.errorCode, error.errorMessage);
             }
             UserToken token = servicesFactory.userTokenService.createOrupdateToken(user.getUserId());
-            response = new LoginResponseBean(user.getUserId(), token.getTokenId(), user.getStatus());
+            AUserBean userDetails = servicesFactory.usersService.convertToUserBean(user);
+            response = new LoginResponseBean(user.getUserId(), token.getTokenId(), user.getStatus(), userDetails);
 
         } catch (BaseException ex) {
             ErrorResponse errorResponse = new ErrorResponse(ex.getErrorCode(), ex.getErrorMessage());

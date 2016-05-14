@@ -3,7 +3,6 @@ package rest.controllers;
 import models.Person;
 import play.mvc.BodyParser;
 import play.mvc.Result;
-import rest.bean.request.UserTransactionRequestBean;
 import rest.bean.response.LoginResponseBean;
 import rest.factory.BaseController;
 import services.service.ServicesFactory;
@@ -77,7 +76,7 @@ public class Application extends BaseController {
 	    	
 	    	response = new ArrayList<>();
 	    	for(Person user : users) {
-	    		LoginResponseBean aUserResponse = new LoginResponseBean(user.id, user.firstname, null);
+	    		LoginResponseBean aUserResponse = new LoginResponseBean(user.id, user.firstname, null, null);
 	    		response.add(aUserResponse);
 	    	}
 	    	

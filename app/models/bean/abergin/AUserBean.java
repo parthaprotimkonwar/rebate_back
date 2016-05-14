@@ -2,6 +2,7 @@ package models.bean.abergin;
 
 import application.enums.STATUS;
 import application.enums.USER_TYPE;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import models.abergin.AUser;
 
 import java.io.Serializable;
@@ -46,14 +47,18 @@ public class AUserBean implements Serializable {
 
     private String mobile;
 
+    @JsonIgnore
     private String password;
 
+    @JsonIgnore
     private Date lastLogin;
 
+    @JsonIgnore
     private Date createdOn;
 
     private String imageUrl;
 
+    @JsonIgnore
     private STATUS status;
 
     public AUserBean superImposeUser(AUserBean onotherUser) {
