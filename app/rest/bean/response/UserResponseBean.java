@@ -1,38 +1,33 @@
-package models.bean.abergin;
+package rest.bean.response;
 
 import application.enums.STATUS;
 import application.enums.USER_TYPE;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import models.abergin.AUser;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class AUserBean implements Serializable {
+public class UserResponseBean implements Serializable {
 
-    public AUserBean() {
+    public UserResponseBean() {
     }
 
-    public AUserBean(Long userId, USER_TYPE userType, String name, String email, String mobile, String password, Date lastLogin, Date createdOn, String imageUrl, STATUS status) {
+    public UserResponseBean(Long userId, USER_TYPE userType, String name, String email, String mobile, Date lastLogin, Date createdOn, String imageUrl, STATUS status) {
         this.userId = userId;
         this.userType = userType;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
-        this.password = password;
         this.lastLogin = lastLogin;
         this.createdOn = createdOn;
         this.imageUrl = imageUrl;
         this.status = status;
     }
 
-    public AUserBean(USER_TYPE userType, String name, String email, String mobile, String password, Date lastLogin, Date createdOn, String imageUrl, STATUS status) {
+    public UserResponseBean(USER_TYPE userType, String name, String email, String mobile, Date lastLogin, Date createdOn, String imageUrl, STATUS status) {
         this.userType = userType;
         this.name = name;
         this.email = email;
         this.mobile = mobile;
-        this.password = password;
         this.lastLogin = lastLogin;
         this.createdOn = createdOn;
         this.imageUrl = imageUrl;
@@ -49,38 +44,14 @@ public class AUserBean implements Serializable {
 
     private String mobile;
 
-    private String password;
-
-    @JsonIgnore
     private Date lastLogin;
 
-    @JsonIgnore
     private Date createdOn;
 
     private String imageUrl;
 
-    @JsonIgnore
     private STATUS status;
 
-    public AUserBean superImposeUser(AUserBean onotherUser) {
-        if (onotherUser == null)
-            return this;
-
-        if (userType == null)
-            userType = onotherUser.getUserType();
-        if (imageUrl == null)
-            imageUrl = onotherUser.getImageUrl();
-        if (password == null && userType != USER_TYPE.REBATE)
-            password = onotherUser.getPassword();
-        if (lastLogin == null)
-            lastLogin = onotherUser.getLastLogin();
-        if (createdOn == null)
-            createdOn = onotherUser.getCreatedOn();
-        if (status == null)
-            status = onotherUser.getStatus();
-
-        return this;
-    }
 
     public Long getUserId() {
         return userId;
@@ -112,14 +83,6 @@ public class AUserBean implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Date getLastLogin() {

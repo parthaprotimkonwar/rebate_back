@@ -7,6 +7,7 @@ import application.exceptions.ErrorConstants;
 import models.abergin.AUser;
 import models.bean.abergin.AUserBean;
 import repository.abergin.AUsersRepository;
+import rest.bean.response.UserResponseBean;
 import services.service.abergin.AUsersServiceI;
 
 import javax.inject.Inject;
@@ -109,8 +110,8 @@ public class AUsersServiceImpl implements AUsersServiceI {
 	}
 
 	@Override
-	public AUserBean convertToUserBean(AUser aUser) throws BaseException {
-		return new AUserBean(aUser.getUserId(), aUser.getUserType(), aUser.getName(), aUser.getEmail(), aUser.getMobile(), aUser.getPassword(), aUser.getLastLogin(), aUser.getCreatedOn(), aUser.getImageUrl(), aUser.getStatus());
+	public UserResponseBean convertToUserBean(AUser aUser) throws BaseException {
+		return new UserResponseBean(aUser.getUserId(), aUser.getUserType(), aUser.getName(), aUser.getEmail(), aUser.getMobile(), aUser.getLastLogin(), aUser.getCreatedOn(), aUser.getImageUrl(), aUser.getStatus());
 	}
 
 }

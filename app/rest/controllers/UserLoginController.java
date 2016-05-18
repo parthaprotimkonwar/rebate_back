@@ -12,6 +12,7 @@ import rest.bean.request.UserTransactionRequestBean;
 import rest.bean.response.ErrorResponse;
 import rest.bean.response.LoginResponseBean;
 import rest.bean.response.ResponseBean;
+import rest.bean.response.UserResponseBean;
 import rest.factory.BaseController;
 import services.service.ServicesFactory;
 
@@ -37,7 +38,7 @@ public class UserLoginController extends BaseController{
             AUserBean userBean = convertRequestBodyToObject(request().body(), AUserBean.class);
             AUser user = servicesFactory.usersService.createAUser(userBean);
             UserToken token = servicesFactory.userTokenService.createOrupdateToken(user.getUserId());
-            AUserBean userDetails = servicesFactory.usersService.convertToUserBean(user);
+            UserResponseBean userDetails = servicesFactory.usersService.convertToUserBean(user);
             response = new LoginResponseBean(user.getUserId(), token.getTokenId(), user.getStatus(), userDetails);
 
         } catch (BaseException ex) {
@@ -64,7 +65,7 @@ public class UserLoginController extends BaseController{
                 throw new BaseException(error.errorCode, error.errorMessage);
             }
             UserToken token = servicesFactory.userTokenService.createOrupdateToken(user.getUserId());
-            AUserBean userDetails = servicesFactory.usersService.convertToUserBean(user);
+            UserResponseBean userDetails = servicesFactory.usersService.convertToUserBean(user);
             response = new LoginResponseBean(user.getUserId(), token.getTokenId(), user.getStatus(), userDetails);
 
         } catch (BaseException ex) {

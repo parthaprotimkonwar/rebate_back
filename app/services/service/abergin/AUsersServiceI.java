@@ -5,6 +5,7 @@ import application.exceptions.BaseException;
 import com.fasterxml.jackson.databind.deser.Deserializers;
 import models.abergin.AUser;
 import models.bean.abergin.AUserBean;
+import rest.bean.response.UserResponseBean;
 
 import java.util.List;
 
@@ -73,5 +74,5 @@ public interface AUsersServiceI {
 	 * @return
 	 * @throws BaseException
 	 */
-	AUserBean convertToUserBean(AUser aUser) throws BaseException;
+	UserResponseBean convertToUserBean(AUser aUser) throws BaseException;
 }

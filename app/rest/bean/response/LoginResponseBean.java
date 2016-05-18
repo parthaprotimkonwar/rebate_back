@@ -1,7 +1,6 @@
 package rest.bean.response;
 
 import application.enums.STATUS;
-import models.bean.abergin.AUserBean;
 
 import java.io.Serializable;
 
@@ -11,7 +10,7 @@ public class LoginResponseBean implements Serializable {
 
     public LoginResponseBean() {}
 
-    public LoginResponseBean(Long userId, String token, STATUS status, AUserBean userDetails) {
+    public LoginResponseBean(Long userId, String token, STATUS status, UserResponseBean userDetails) {
         this.userId = userId;
         this.token = token;
         this.status = status;
@@ -21,7 +20,7 @@ public class LoginResponseBean implements Serializable {
     private Long userId;
     private String token;
     private STATUS status;
-    private AUserBean userDetails;
+    private UserResponseBean userDetails;
 
 
     public Long getUserId() {
@@ -49,11 +48,11 @@ public class LoginResponseBean implements Serializable {
         this.status = status;
     }
 
-    public AUserBean getUserDetails() {
+    public UserResponseBean getUserDetails() {
         return userDetails;
     }
 
-    public void setUserDetails(AUserBean userDetails) {
+    public void setUserDetails(UserResponseBean userDetails) {
         this.userDetails = userDetails;
     }
 }

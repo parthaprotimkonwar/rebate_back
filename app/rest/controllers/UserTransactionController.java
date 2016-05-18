@@ -71,7 +71,4 @@ public class UserTransactionController extends BaseController{
         }
         return convertObjectToJsonResponse(response);
     }
-
-
-
 }
