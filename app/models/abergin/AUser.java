@@ -34,7 +34,7 @@ public class AUser implements Serializable{
 	@Enumerated(value = EnumType.ORDINAL)
 	private USER_TYPE userType;
 
-	@Column(name = "NAME", length = 20)
+	@Column(name = "NAME", length = 30)
 	private String name;
 
 	@Column(name = "EMAIL", length = 30)
@@ -56,6 +56,9 @@ public class AUser implements Serializable{
 	@Column(name="CREATED_ON")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdOn;
+
+	@Column(name = "IS_VERIFIED")
+	private Boolean isVerified;
 
 	@Column(name = "STATUS")
 	@Enumerated(value = EnumType.ORDINAL)
@@ -197,5 +200,13 @@ public class AUser implements Serializable{
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public Boolean getIsVerified() {
+		return isVerified;
+	}
+
+	public void setIsVerified(Boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 }
