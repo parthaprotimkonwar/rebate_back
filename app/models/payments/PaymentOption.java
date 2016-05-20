@@ -15,7 +15,7 @@ import java.util.Set;
 public class PaymentOption implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "PAYMENT_OPTIONS_ID")
     private Long paymentOptionsId;
 

@@ -25,7 +25,7 @@ public class Address implements Serializable{
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="ADDRESS_ID")
 	private Long addressId;
 	

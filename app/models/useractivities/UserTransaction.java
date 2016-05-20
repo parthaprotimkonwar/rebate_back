@@ -20,7 +20,7 @@ public class UserTransaction implements Serializable{
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "USER_TRANSACTION_ID")
     private Long userTransactionId;
 

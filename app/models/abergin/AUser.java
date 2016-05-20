@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="USERS", schema= Constants.SCHEMA_NAME_REABTE_ABERGIN,
-		uniqueConstraints={@UniqueConstraint(columnNames = {"USER_TYPE" , "EMAIL"})},
+		uniqueConstraints={@UniqueConstraint(columnNames = {"USER_TYPE","EMAIL"})},
 		indexes = {
 				@Index(name = "USERS_REABTE_LOGIN", columnList = "USER_TYPE,EMAIL,PASSWORD"),
 				@Index(name = "USERS_SOCIAL_LOGIN", columnList = "USER_TYPE,EMAIL")
@@ -26,7 +26,7 @@ public class AUser implements Serializable{
 	public AUser() {}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="USER_ID")
 	private Long userId;
 	
