@@ -47,7 +47,7 @@ public class BaseController extends Controller{
 	 */
 	public Result convertObjectToJsonResponse(Object object){
 		JsonNode jsonNode = Json.toJson(object);
-		response().setHeader("Access-Control-Allow-Origin", request().getHeader("Origin"));
+		addCORSHeader();
 		return ok(jsonNode);
 	}
 	
@@ -60,7 +60,16 @@ public class BaseController extends Controller{
 		JsonNode jsonNode = Json.toJson(object);
 		return status(HttpStatus.SC_BAD_REQUEST, jsonNode);
 	}
-	
+
+	/**
+	 * Add CORS Header
+	 */
+	public void addCORSHeader() {
+		String origin = request().getHeader("Origin");
+		if(origin != null)
+			response().setHeader("Access-Control-Allow-Origin", origin);
+	}
+
 	/**
 	 * Finds ErrorType based on errorResponse and send specific response.
 	 * Rules :
@@ -102,7 +111,7 @@ public class BaseController extends Controller{
 	 */
 	public Result errorObjectToJsonResponse(int httpErrorCode, ErrorResponse errorResponse){
 		JsonNode jsonNode = Json.toJson(errorResponse);
-		response().setHeader("Access-Control-Allow-Origin", request().getHeader("Origin"));
+		addCORSHeader();
 		return status(httpErrorCode, jsonNode);
 	}
 }
